@@ -1,9 +1,12 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 
-ReactDOM.render(
-    <div>
-        <h1>Using WebAssembly with React From Scratch!</h1>
-    </div>,
-    document.getElementById('root')
+import App from './App';
+
+const container = document.getElementById('root');
+const root = createRoot(container);
+root.render(
+    <div className="index">
+        <App />
+    </div>
 );

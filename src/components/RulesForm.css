@@ -1,0 +1,11 @@
+.rules-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 1em;
+}
+
+.all-rules {
+    margin: 1;
+    list-style-type: none;
+}

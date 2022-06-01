@@ -1,0 +1,11 @@
+.displayer-header-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: x-large;
+}
+
+.display-current-index {
+    color: var(--main-red);
+}

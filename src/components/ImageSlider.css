@@ -1,0 +1,23 @@
+.slider {
+    display: flex;
+    list-style-type: none;
+    border: 5px var(--main-white);
+}
+
+.slide-container {
+    width: 170px;
+}
+
+.slide {
+    border: 3px solid var(--main-purple);
+    font-size: 30px;
+    margin: 10px;
+    padding: 60px;
+    color: var(--main-black);
+    background-color: var(--main-white);
+}
+
+.selected-slide:focus {
+    border: 5px solid var(--main-red);
+    background-color: var(--main-black);
+}
