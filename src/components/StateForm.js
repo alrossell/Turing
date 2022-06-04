@@ -34,9 +34,9 @@ function StateForm(props) {
 
     function displayValidState() {
         if (validState) {
-            return <h3>This is a Valid State</h3>;
+            return <h4>This New State is Valid</h4>;
         } else {
-            return <h3>This is NOT a Valid State</h3>;
+            return <h4>This New State is NOT Valid</h4>;
         }
     }
 
@@ -44,7 +44,13 @@ function StateForm(props) {
         if (acceptedState === '') {
             return <h4>Please enter a valid state</h4>;
         } else {
-            return <p>{acceptedState}</p>;
+            return (
+                <div id="display-state">
+                    <h4 id="current-state">Current State:</h4>
+
+                    <p>{acceptedState}</p>
+                </div>
+            );
         }
     }
 

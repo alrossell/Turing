@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { computerAllSteps, listAllSteps } from './logic/Turing.js';
-import FinitDisplay from './components/FiniteDisplay';
+import FiniteDisplay from './components/FiniteDisplay';
 import InfiniteDisplay from './components/InfiniteDisplay';
 
 import './Display.css';
@@ -9,59 +9,64 @@ import './Display.css';
 function Display(props) {
     const [allRules, setAllRules] = props.rules;
     const [acceptedState, setAcceptedState] = props.state;
-    const [currentDisplay, setCurrentDisplay] = useState('none');
-
-    useEffect(() => {
-        const storage = window.localStorage.getItem('currentDisplay');
-        if (storage !== '[]') {
-            setCurrentDisplay(JSON.parse(storage));
-        }
-    }, []);
-
-    useEffect(() => {
-        window.localStorage.setItem(
-            'currentDisplay',
-            JSON.stringify(currentDisplay)
-        );
-    }, [currentDisplay]);
+    const [currentDisplay, setCurrentDisplay] = useState();
 
     function computerTuringMachine() {
-        const numberOfSteps = computerAllSteps(allRules, acceptedState);
-        if (numberOfSteps === -1) {
+        let currentDisplayMode;
+        const storage = window.localStorage.getItem('setCurrentDisplayMode');
+        if (storage !== null) {
+            currentDisplayMode = JSON.parse(
+                window.localStorage.getItem('setCurrentDisplayMode')
+            );
         } else {
-            setCurrentDisplay('finite');
+            if (computerAllSteps(allRules, acceptedState) === -1) {
+                currentDisplayMode = 'infinite';
+            } else {
+                currentDisplayMode = 'finite';
+            }
+            window.localStorage.setItem(
+                'setCurrentDisplayMode',
+                JSON.stringify(currentDisplayMode)
+            );
+        }
+
+        if (currentDisplayMode === 'finite') {
+            setCurrentDisplay(
+                <FiniteDisplay
+                    rules={[allRules, setAllRules]}
+                    state={[acceptedState, setAcceptedState]}
+                />
+            );
+        } else {
+            setCurrentDisplay(
+                <InfiniteDisplay
+                    rules={[allRules, setAllRules]}
+                    state={[acceptedState, setAcceptedState]}
+                />
+            );
         }
     }
 
     function differentDisplay() {
-        if (currentDisplay === 'finite') {
+        if (currentDisplay === undefined) {
             return (
-                <FinitDisplay
-                    rules={[allRules, setAllRules]}
-                    state={[acceptedState, setAcceptedState]}
-                />
+                <div className="display">
+                    <div className="display-button-container">
+                        <button
+                            className="display-button"
+                            onClick={computerTuringMachine}
+                        >
+                            Start the Turing Machine
+                        </button>
+                    </div>
+                </div>
             );
-        } else if (currentDisplay === 'infinit') {
-            return (
-                <InfinitDisplay
-                    rules={[allRules, setAllRules]}
-                    state={[acceptedState, setAcceptedState]}
-                />
-            );
+        } else {
+            return currentDisplay;
         }
-        return (
-            <div className="display-button-container">
-                <button
-                    className="display-button"
-                    onClick={computerTuringMachine}
-                >
-                    Start the Turing Machine
-                </button>
-            </div>
-        );
     }
 
-    return <div className="display">{differentDisplay()}</div>;
+    return differentDisplay();
 }
 
 export default Display;

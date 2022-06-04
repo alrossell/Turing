@@ -6,3 +6,15 @@
     align-items: center;
     margin: 1em;
 }
+
+#display-state {
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#current-state {
+    text-decoration: underline var(--main-green) 2px;
+
+}

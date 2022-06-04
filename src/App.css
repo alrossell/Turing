@@ -10,9 +10,9 @@
     color: var(--main-white);
 
     --main-black: #000000;
-    --main-blue: #062f4f;
+    --main-blue: #05243b;
     --main-purple: #813772;
     --main-red: #b82601;
-    --main-aqua: #17bebb;
-    --main-white: #f6f7eb;
+    --main-green: rgb(13, 149, 13);
+    --main-white: #e6e7dc;
 }

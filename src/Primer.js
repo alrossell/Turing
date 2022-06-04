@@ -10,13 +10,20 @@ import './Primer.css';
 function State(props) {
     const navigate = useNavigate();
 
-    function displayIsValid() {
-        let buttonFunction = () => {};
+    function checkIsValid() {
         if (allRules.length === 0 || acceptedState === '') {
             alert('Both a valid rule and a valid state must be submitted!');
         } else {
             window.localStorage.clear();
             navigate('/display');
+        }
+    }
+
+    function displayIsValid() {
+        if (allRules.length === 0 || acceptedState === '') {
+            return <p id="not-valid-display">Not a Valid Turing Machine</p>;
+        } else {
+            return <p id="is-valid-display">Is a Valid Turing Machine</p>;
         }
     }
 
@@ -43,7 +50,8 @@ function State(props) {
             </div>
 
             <div className="primer-button-container">
-                <button className="primer-button" onClick={displayIsValid}>
+                {displayIsValid()}
+                <button className="primer-button" onClick={checkIsValid}>
                     Commence the Turing Machine
                 </button>
                 <button className="primer-button" onClick={setDefaultValues}>

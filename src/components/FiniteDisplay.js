@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { computerAllSteps, listAllSteps } from '../logic/Turing.js';
 import { useNavigate } from 'react-router-dom';
 
-import DisplayHeader from './DisplayHeader.js';
+import DisplayTape from './DisplayTape.js';
 import ImageSlider from './ImageSlider.js';
 import RulesDisplay from './RulesDisplay.js';
 
@@ -77,20 +77,31 @@ function finitDisplay(props) {
     }
 
     return (
-        <div>
-            <DisplayHeader
-                tapes={tapes}
-                indexes={indexes}
-                index={index}
-                rules={rules}
-            />
-            <ImageSlider
-                tapes={tapes}
-                rules={rules}
-                indexes={indexes}
-                index={index}
-            />
-            <RulesDisplay rules={rules} index={index} />
+        <div className="finite-display-container">
+            <div className="finite-display-header">
+                <button className="bttn-container" onClick={partialReset}>
+                    Edit Turing Machine
+                </button>
+                <button className="bttn-container" onClick={fullReset}>
+                    Reset Turing Machine
+                </button>
+            </div>
+            <div className="finite-display-body">
+                <DisplayTape
+                    tapes={tapes}
+                    indexes={indexes}
+                    index={index}
+                    rules={rules}
+                />
+                <ImageSlider
+                    tapes={tapes}
+                    rules={rules}
+                    indexes={indexes}
+                    index={index}
+                />
+                <RulesDisplay rules={rules} index={index} />
+            </div>
+
             <div className="finite-diplay-button-container">
                 <button className="bttn-container" onClick={previousStep}>
                     Prev
@@ -100,12 +111,6 @@ function finitDisplay(props) {
                 </button>
                 <button className="bttn-container" onClick={finishState}>
                     Finish
-                </button>
-                <button className="bttn-container" onClick={fullReset}>
-                    Reset Turing Machine
-                </button>
-                <button className="bttn-container" onClick={partialReset}>
-                    Edit Turing Machine
                 </button>
             </div>
         </div>

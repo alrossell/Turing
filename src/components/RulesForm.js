@@ -34,10 +34,15 @@ function RulesForm(props) {
 
     function displayValidRule() {
         if (validRule) {
-            return <h3>Is a Valid Rule</h3>;
+            return <h4>This New Rule is Valid</h4>;
         } else {
-            return <h3>Is NOT a Valid Rule</h3>;
+            return <h4>This New Rule is NOT Valid</h4>;
         }
+    }
+
+    function removeRule(index) {
+        allRules.splice(index, 1);
+        setAllRules([...allRules]);
     }
 
     function displayAllRules() {
@@ -45,9 +50,22 @@ function RulesForm(props) {
             return <h4>Please enter a valid rule</h4>;
         } else {
             const listRules = allRules.map((rule, index) => (
-                <li key={index}>{`${index + 1} : ${rule}`}</li>
+                <li key={index}>
+                    {`${index + 1} : ${rule}`}{' '}
+                    <button
+                        className="remove-button"
+                        onClick={() => removeRule(index)}
+                    >
+                        X
+                    </button>
+                </li>
             ));
-            return <ul className="all-rules">{listRules}</ul>;
+            return (
+                <div id="valid-rules-container">
+                    <h4 id="valid-rules">Current Valid Rules:</h4>
+                    <ul className="all-rules">{listRules}</ul>
+                </div>
+            );
         }
     }
 
