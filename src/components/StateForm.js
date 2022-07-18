@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import './StateForm.css';
+import '../css/StateForm.css';
 
 function StateForm(props) {
     const [newState, setNewState] = useState('');

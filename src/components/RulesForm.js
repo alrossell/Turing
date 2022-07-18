@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import './RulesForm.css';
+import '../css/RulesForm.css';
 
 function RulesForm(props) {
     const [allRules, setAllRules] = props.rules;

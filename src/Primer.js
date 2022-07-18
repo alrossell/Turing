@@ -1,20 +1,35 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 
 import RulesForm from './components/RulesForm';
 import StateForm from './components/StateForm';
 
-import './Primer.css';
+import randomTuring from "./utils/randomTuring"
+import getData from './utils/getData';
+import  storeData  from "./utils/storeData"
+
+import './css/Primer.css';
 
 function State(props) {
     const navigate = useNavigate();
+
+    const allRulesOpt = getData("allRules");
+    console.log(allRulesOpt)
+    const [allRules, setAllRules] = useState(
+        allRulesOpt === null ? [] : allRulesOpt
+    )
+
+    const acceptedStateOpt = getData("acceptedState");
+    const [acceptedState, setAcceptedState] = useState(
+        acceptedStateOpt === null ? "" : acceptedStateOpt
+    )
 
     function checkIsValid() {
         if (allRules.length === 0 || acceptedState === '') {
             alert('Both a valid rule and a valid state must be submitted!');
         } else {
-            window.localStorage.clear();
+            window.sessionStorage.clear();
+            storeData([["allRules", allRules], ["acceptedState", acceptedState]])
             navigate('/display');
         }
     }
@@ -27,17 +42,15 @@ function State(props) {
         }
     }
 
-    const [allRules, setAllRules] = props.rules;
-    const [acceptedState, setAcceptedState] = props.state;
+    function setRandomMachine() {
+        const [states, turing] = randomTuring()
+        setAllRules(turing);
+        setAcceptedState(states);
+    }
 
-    function setDefaultValues() {
-        setAllRules([
-            ['Scan', '0', '0', 'R', 'Scan'],
-            ['Scan', '1', '1', 'R', 'Scan'],
-            ['Scan', '#', '0', 'R', 'Adding'],
-            ['Adding', '#', '0', 'R', 'Halt'],
-        ]);
-        setAcceptedState('1010');
+    function clear() {
+        setAllRules([]);
+        setAcceptedState("");
     }
 
     return (
@@ -45,8 +58,8 @@ function State(props) {
             <h1 id="primer-title">The Turing Machine</h1>
 
             <div className="form-container">
-                <RulesForm rules={props.rules} />
-                <StateForm state={props.state} />
+                <RulesForm rules={[allRules, setAllRules]} />
+                <StateForm state={[acceptedState, setAcceptedState]} />
             </div>
 
             <div className="primer-button-container">
@@ -54,8 +67,11 @@ function State(props) {
                 <button className="primer-button" onClick={checkIsValid}>
                     Commence the Turing Machine
                 </button>
-                <button className="primer-button" onClick={setDefaultValues}>
-                    Set to default Values
+                <button className="primer-button" onClick={setRandomMachine}>
+                    Set to Random Machine
+                </button>
+                <button className="primer-button" onClick={clear}>
+                    Clear the Turing Machine
                 </button>
             </div>
         </div>

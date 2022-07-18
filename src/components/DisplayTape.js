@@ -1,28 +1,28 @@
 import React from 'react';
 
-import './DisplayTape.css';
+import '../css/DisplayTape.css';
 
 function DisplayTape(props) {
     const tapes = props.tapes;
     const indexes = props.indexes;
-    const index = props.index;
+    const mainIndex = props.mainIndex;
     const rules = props.rules;
 
-    function testing(symbolIndex) {
-        if (symbolIndex === indexes[index]) {
+    function labelTape(symbolIndex) {
+        if (symbolIndex === indexes[mainIndex]) {
             return 'display-current-index';
-        } else if (symbolIndex === indexes[index + 1]) {
+        } else if (symbolIndex === indexes[mainIndex + 1]) {
             return 'display-next-index';
         } else {
             return 'display-index';
         }
     }
-    function test() {
-        console.log(tapes[index].map((symbol, symbolIndex) => symbol));
+
+    function makeTape() {
         return (
             <ul className="header-tape">
-                {tapes[index].map((symbol, symbolIndex) => (
-                    <li key={symbolIndex} className={testing(symbolIndex)}>
+                {tapes[mainIndex].map((symbol, symbolIndex) => (
+                    <li key={symbolIndex} className={labelTape(symbolIndex)}>
                         {symbol}
                     </li>
                 ))}
@@ -30,21 +30,19 @@ function DisplayTape(props) {
         );
     }
 
-    if (tapes !== null && tapes.length !== 0) {
-        return (
-            <div className="displayer-header-container">
-                {index === indexes.length - 1 ? (
-                    <h6>Return Tape:</h6>
-                ) : (
-                    <h6>Current Tape:</h6>
-                )}
+    return (
+        <div className="displayer-header-container">
+            {mainIndex === indexes.length - 1 ? (
+                <h6 id="return-tape">Return Tape:</h6>
+            ) : (
+                <h6>Current Tape:</h6>
+            )}
 
-                {test()}
-                <h6>Current Rule:</h6>
-                {rules[index]}
-            </div>
-        );
-    }
+            {makeTape()}
+            <h6>Current Rule:</h6>
+            {rules[mainIndex]}
+        </div>
+    );
 }
 
 export default DisplayTape;

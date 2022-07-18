@@ -1,15 +1,14 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Primer from './Primer';
 import Display from './Display';
+import FiniteDisplay from './Finite';
+import InfiniteDisplay from './Infinite';
 
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
-import './App.css';
+import './css/App.css';
 
 export default function App() {
-    const [allRules, setAllRules] = useState([]);
-    const [acceptedState, setAcceptedState] = useState('');
-
     return (
         <div className="App">
             <Router>
@@ -17,19 +16,25 @@ export default function App() {
                     <Route
                         path="/"
                         element={
-                            <Primer
-                                rules={[allRules, setAllRules]}
-                                state={[acceptedState, setAcceptedState]}
-                            />
+                            <Primer/>
                         }
                     />
                     <Route
                         path="/display"
                         element={
-                            <Display
-                                rules={[allRules, setAllRules]}
-                                state={[acceptedState, setAcceptedState]}
-                            />
+                            <Display/>
+                        }
+                    />
+                    <Route
+                        path="/finiteDisplay"
+                        element={
+                            <FiniteDisplay/>
+                        }
+                    />
+                    <Route
+                        path="/infiniteDisplay"
+                        element={
+                            <InfiniteDisplay/>
                         }
                     />
                 </Routes>

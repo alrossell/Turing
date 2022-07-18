@@ -1,120 +1,111 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 
-import './ImageSlider.css';
+import '../css/ImageSlider.css';
 
 function ImageSlider(props) {
     const tapes = props.tapes;
     const indexes = props.indexes;
-    const index = props.index;
-    const rules = props.rules;
+    const mainIndex = props.mainIndex;
 
     const bufferLength = 8;
     const slideWidth = 170;
 
-    const [sliderTape, setSliderTape] = useState();
-    const [previousIndex, setPreviousIndex] = useState(-1);
-    const [slideTo, setSlideTo] = useState();
+    const [sliderTape, setSliderTape] = useState(makeSliderTapes());
+    const [previousIndex, setPreviousIndex] = useState(null);
 
-    const slider = document.querySelector('.slider');
+    const slider = useRef(null);
 
-    const [test, setTest] = useState();
+    function debounce(funct, ms) {
+        let timer
+        
+        return () => {
+          clearTimeout(timer)
+          timer = setTimeout(_ => {
+            timer = null
+            funct.apply(this, arguments)
+          }, ms)
+        };
+    }
 
     useEffect(() => {
-        if (tapes !== undefined && tapes.length !== 0) {
-            setSliderTape([
-                ...Array(bufferLength).fill('#'),
-                ...tapes[index],
-                ...Array(bufferLength).fill('#'),
-            ]);
-
-            const newSlideTo = -(
-                bufferLength * slideWidth +
-                slideWidth / 2 -
-                window.outerWidth / 2
-            );
-            setSlideTo(newSlideTo);
-            setPreviousIndex(index);
-            slider.style.transition = 'transform 0.6s ease-in-out';
-            slider.style.transform = 'translateX(' + newSlideTo + 'px)';
+        const debouncedHandleResize = debounce(function handleResize() {
+            slider.current.style.transition = 'transform 0.6s ease-in-out';
+            slider.current.style.transform = 'translateX(' + makeSlideTo() + 'px)';
+        }, 100)
+    
+        window.addEventListener('resize', debouncedHandleResize)
+    
+        return () => {
+          window.removeEventListener('resize', debouncedHandleResize)
+        
         }
-    }, [tapes]);
+    })
+
+    function makeSliderTapes() {
+        return ([ ...Array(bufferLength).fill('#'),
+                  ...tapes[mainIndex],
+                  ...Array(bufferLength).fill('#'),
+                ]);
+    }
+
+    function makeSlideTo() {
+        return ( 
+            -(
+                bufferLength * slideWidth +
+                slideWidth/2 +
+                indexes[mainIndex] * slideWidth -
+                (window.innerWidth) / 2
+            )
+        );
+    }
 
     useEffect(() => {
-        if (slider) {
-            let newSlideTo = slideTo;
-            if (previousIndex === -1) {
-            } else if (previousIndex > index) {
-                newSlideTo += slideWidth;
-            } else {
-                newSlideTo -= slideWidth;
-            }
-            setPreviousIndex(index);
-            setSlideTo(newSlideTo);
+        setSliderTape(makeSliderTapes())
 
+        if(previousIndex !== null) {
             const oldSlide = document.getElementById(
                 `slide-${previousIndex + bufferLength}`
-            );
+            )
 
+            // Unhighlighting old slide
             if (oldSlide) {
                 oldSlide.style.borderColor = '#000000';
                 oldSlide.style.transition = 'transform 0.4s';
                 oldSlide.style.transform = 'scale(1, 1)';
             }
-
-            slider.style.transition = 'transform 0.4s ease-in-out';
-            slider.style.transform = 'translateX(' + newSlideTo + 'px)';
-
-            const newSlide = document.getElementById(
-                `slide-${index + bufferLength}`
-            );
-
-            if (newSlide) {
-                newSlide.style.borderColor = '#b82601';
-                newSlide.style.transition = 'transform 0.4s';
-                newSlide.style.transform = 'scale(1.2, 1.2)';
-            }
-
-            if (sliderTape) {
-                setSliderTape([
-                    ...Array(bufferLength).fill('#'),
-                    ...tapes[index],
-                    ...Array(bufferLength).fill('#'),
-                ]);
-            }
         }
-    }, [index]);
 
-    // Set selects the first image
-    useEffect(() => {
+        setPreviousIndex(indexes[mainIndex]);
+
+        slider.current.style.transition = 'transform 0.4s ease-in-out';
+        slider.current.style.transform = 'translateX(' + makeSlideTo() + 'px)';
+
         const newSlide = document.getElementById(
-            `slide-${index + bufferLength}`
+            `slide-${indexes[mainIndex] + bufferLength}`
         );
-
+        
+        // Highlighting new slide
         if (newSlide) {
             newSlide.style.borderColor = '#b82601';
             newSlide.style.transition = 'transform 0.4s';
             newSlide.style.transform = 'scale(1.2, 1.2)';
         }
-    }, [test]);
+    }, [mainIndex]);
 
+    //Display
     function dipslaySliderTape() {
-        if (sliderTape !== undefined && sliderTape.length !== 0) {
-            if (test === undefined) {
-                setTest(1);
-            }
-            return sliderTape.map((symbol, symbolIndex) => (
-                <li className="slide-container" key={symbolIndex}>
-                    <div className="slide" id={'slide-' + symbolIndex}>
-                        {symbol}
-                    </div>
-                </li>
-            ));
-        }
+        return sliderTape.map((symbol, symbolIndex) => (
+            <li className="slide-container" key={symbolIndex}>
+                <div className="slide" id={'slide-' + symbolIndex}>
+                    {symbol}
+                </div>
+            </li>
+        ));
     }
 
     return (
         <div className="slider-container">
-            <ol className="slider">{dipslaySliderTape()}</ol>
+            <ol ref={slider} className="slider">{dipslaySliderTape()}</ol>
         </div>
     );
 }
