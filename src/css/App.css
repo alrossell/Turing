@@ -1,0 +1,20 @@
+* {
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+}
+
+.App {
+    height: 100vh;
+	overflow-y: scroll;
+	overflow-x: hidden;
+    background-color: var(--main-blue);
+    color: var(--main-white);
+
+    --main-black: #000000;
+    --main-blue: #05243b;
+    --main-purple: #813772;
+    --main-red: #b82601;
+    --main-green: rgb(13, 149, 13);
+    --main-white: #e6e7dc;
+}

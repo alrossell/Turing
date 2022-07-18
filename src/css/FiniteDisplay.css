@@ -1,0 +1,13 @@
+.finite-display-header {
+    display: flex;
+    justify-content: flex-end;
+    align-content: left;
+}
+
+.diplay-button-container {
+    position: absolute;
+    bottom: 5px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
