@@ -26,5 +26,5 @@
 
 .display-button:hover {
     background-color: var(--main-red);
-    color: white;
+    color: var(--main-white);
 }

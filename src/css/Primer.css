@@ -3,27 +3,12 @@
     display: flex;
     flex-direction: column;
     font-size: x-large;
+    color: var(--main-white)
 }
 
 #primer-title {
     text-align: center;
     text-decoration: var(--main-red) underline 3px;
-}
-
-.bttn-container {
-    background-color: var(--main-purple);
-    color: var(--main-white);
-    border: none;
-    border-radius: 4px;
-    padding: 0.25em;
-    margin: 0.5em;
-    border: 0.25em solid;
-    border-color: var(--main-black);
-}
-
-.bttn-container:hover {
-    background-color: var(--main-red);
-    color: white;
 }
 
 .primer-button-container {
@@ -44,9 +29,15 @@
     border-color: var(--main-black);
 }
 
+.form-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
 .primer-button:hover {
     background-color: var(--main-red);
-    color: white;
+    color: var(--main-white);
 }
 
 #not-valid-display{

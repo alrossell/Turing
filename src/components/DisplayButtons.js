@@ -29,13 +29,13 @@ function DisplayButtons(props) {
 
     return (
         <div className="diplay-button-container">
-            <button className="bttn-container" onClick={previousStep}>
+            <button className="bttn-container-2" onClick={previousStep}>
                 Prev
             </button>
-            <button className="bttn-container" onClick={nextStep}>
+            <button className="bttn-container-2" onClick={nextStep}>
                 Next
             </button>
-            <button className="bttn-container" onClick={finishState}>
+            <button className="bttn-container-2" onClick={finishState}>
                 Finish
             </button>
         </div>

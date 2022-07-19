@@ -2,6 +2,43 @@
     padding: 0px;
     margin: 0px;
     box-sizing: border-box;
+
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+*::-webkit-scrollbar {
+    display: none;
+  }
+
+  .bttn-container {
+    background-color: var(--main-purple);
+    color: var(--main-white);
+    border: none;
+    border-radius: 4px;
+    padding: 0.25em;
+    margin: 0.5em;
+    border: 0.25em solid;
+    border-color: var(--main-black);
+}
+
+.bttn-container:hover {
+    background-color: var(--main-red);
+    color: var(--main-white);
+}
+
+.bttn-container-2 {
+    background-color: var(--main-white);
+    color: var(--main-black);
+    border: none;
+    border-radius: 4px;
+    padding: 0.5em;
+    margin: 0.5em;
+}
+
+.bttn-container-2:hover {
+    background-color: var(--main-blue);
+    color: var(--main-white);
 }
 
 .App {

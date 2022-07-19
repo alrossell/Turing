@@ -1,10 +1,10 @@
-.state-form {
+.state-form-container {
     color: var(--main-white);
-
     display: flex;
     flex-direction: column;
     align-items: center;
     margin: 1em;
+
 }
 
 #display-state {
@@ -16,5 +16,63 @@
 
 #current-state {
     text-decoration: underline var(--main-green) 2px;
+}
+
+#state-form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
 
 }
+
+#state-info {
+    background-color: var(--main-purple);
+    border-radius: 100%;
+    border: 3px solid var(--main-black);
+    color: var(--main-white);
+    width: 1em;
+    height: 1em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: .5em;
+    margin: .25em;
+    font-size: .75em;
+}
+
+#state-info-dropdown {
+    display: none;
+}
+
+#state-info:hover #state-info-dropdown{
+    display: block;
+}
+
+
+#state-form label {
+    display: flex;
+    align-items: center;
+}
+
+#state-info-dropdown {
+    position: absolute;
+    display: none;
+    left: 105%;
+    background-color: var(--main-white);
+    border-radius: 4px;
+    color: var(--main-black);
+    width: 21vw;
+    padding: 0.25em;
+}
+
+#state-info-dropdown::after {
+    content: " ";
+    position: absolute;
+    top: 50%;
+    right: 100%; /* To the left of the tooltip */
+    margin-top: -10px;
+    border-width: 10px;
+    border-style: solid;
+    border-color: transparent var(--main-white) transparent transparent;
+  }

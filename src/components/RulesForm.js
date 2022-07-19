@@ -70,9 +70,9 @@ function RulesForm(props) {
     }
 
     return (
-        <div className="rules-form">
+        <div className="rules-form-container">
             <h2>Submit All Rules One at a Time</h2>
-            <form onSubmit={handleRuleSubmit}>
+            <form id="rules-form" onSubmit={handleRuleSubmit}>
                 <input
                     className="bttn-container"
                     type="submit"
@@ -80,11 +80,23 @@ function RulesForm(props) {
                 />
                 <label>
                     <input
+                        placeholder="enter your rule here"
                         type="text"
                         name="name"
                         onChange={handleRuleChange}
                     />
                 </label>
+                <div id="rules-info">
+                    <spam>
+                        ?
+                    </spam>
+                    <p id="rules-info-dropdown">
+                        The valid inputs for rules follows the pattern of:
+                        (Initial State), (Initial Sybmol(0/1/#)), (Replacement Sybmol(0/1/#))
+                        (Direction (L/R)), (Next State)
+                    </p>
+                </div>
+                
             </form>
             {displayValidRule()}
             {displayAllRules()}

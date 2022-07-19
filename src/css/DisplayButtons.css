@@ -1,7 +1,8 @@
 .diplay-button-container {
     position: absolute;
-    bottom: 5px;
+    bottom: 0px;
     width: 100%;
     display: flex;
     justify-content: center;
+    background-color: var(--main-purple);
 }

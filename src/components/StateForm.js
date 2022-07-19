@@ -55,10 +55,10 @@ function StateForm(props) {
     }
 
     return (
-        <div className="state-form">
+        <div className="state-form-container">
             <h2>Submit Starting State</h2>
 
-            <form onSubmit={handleStateSubmit}>
+            <form id="state-form" onSubmit={handleStateSubmit}>
                 <input
                     className="bttn-container"
                     type="submit"
@@ -66,11 +66,20 @@ function StateForm(props) {
                 />
                 <label>
                     <input
+                        placeholder="enter your state here"
                         type="text"
                         name="name"
                         onChange={handleStateChange}
                     />
                 </label>
+                <div id="state-info">
+                    <spam>
+                        ?
+                    </spam>
+                    <p id="state-info-dropdown">
+                        A valid state consists of 1, 0, or #.
+                    </p>
+                </div>
             </form>
             {displayValidState()}
             {displayState()}
