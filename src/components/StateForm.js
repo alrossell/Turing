@@ -77,7 +77,8 @@ function StateForm(props) {
                         ?
                     </spam>
                     <p id="state-info-dropdown">
-                        A valid state consists of 1, 0, or #.
+                        A valid state consists of: <br/> 
+                        1, 0, or #
                     </p>
                 </div>
             </form>

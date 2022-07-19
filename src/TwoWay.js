@@ -8,9 +8,9 @@ import DisplayButtons from './components/DisplayButtons.js';
 
 import getData from "./utils/getData.js"
 
-import './css/FiniteDisplay.css';
+import './css/TwoWayDisplay.css';
 
-function finitDisplay(props) {
+function twoWayDisplay(props) {
     const navigate = useNavigate();
 
     const [tapes, setTapes] = useState(getData("tapes"));
@@ -36,7 +36,7 @@ function finitDisplay(props) {
         navigate('/');
     }
 
-    function getFiniteDisplay() {
+    function getTwoWayDisplay() {
         
         return (
             <div className="finite-display-container">
@@ -74,7 +74,7 @@ function finitDisplay(props) {
         )
     }
 
-    return getFiniteDisplay();
+    return getTwoWayDisplay();
 }
 
-export default finitDisplay;
+export default twoWayDisplay;

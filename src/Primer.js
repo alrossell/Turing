@@ -36,9 +36,17 @@ function State(props) {
 
     function displayIsValid() {
         if (allRules.length === 0 || acceptedState === '') {
-            return <p id="not-valid-display">Not a Valid Turing Machine</p>;
+            return <p 
+                className = "valid-wrapper"
+                id="not-valid-display">
+                    Not a Valid Turing Machine
+                </p>;
         } else {
-            return <p id="is-valid-display">Is a Valid Turing Machine</p>;
+            return <p 
+                className="valid-wrapper"
+                id="is-valid-display">
+                    Is a Valid Turing Machine
+                </p>;
         }
     }
 
@@ -62,8 +70,10 @@ function State(props) {
                 <StateForm state={[acceptedState, setAcceptedState]} />
             </div>
 
+            {displayIsValid()}
+
             <div className="primer-button-container">
-                {displayIsValid()}
+                
                 <button className="primer-button" onClick={checkIsValid}>
                     Commence the Turing Machine
                 </button>
@@ -73,6 +83,13 @@ function State(props) {
                 <button className="primer-button" onClick={clear}>
                     Clear the Turing Machine
                 </button>
+            </div>
+
+            <div id="info-link-container">
+                <a className="bttn-container-2" href="https://cs.lmu.edu/~ray/notes/turingmachines/">
+                    What's a Turing Machine?
+                </a>
+
             </div>
         </div>
     );

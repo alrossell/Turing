@@ -16,10 +16,11 @@ function Display(props) {
 
     function computerTuringMachine() {
         if (computerAllSteps(allRules, acceptedState) === -1) {
-            navigate('/infiniteDisplay');
+            alert("Turing Machine too large")
+            navigate('/');
             
         } else {
-            navigate('/finiteDisplay');
+            navigate('/twoWayDisplay');
             const steps = listAllSteps(allRules, acceptedState);
             storeData([["rules", steps.rules], ["indexes", steps.indexes], ["tapes", steps.tapes]])
         }

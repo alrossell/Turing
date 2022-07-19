@@ -1,8 +1,7 @@
 import React from 'react';
 import Primer from './Primer';
 import Display from './Display';
-import FiniteDisplay from './Finite';
-import InfiniteDisplay from './Infinite';
+import TwoWayDisplay from './TwoWay';
 
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
@@ -26,15 +25,9 @@ export default function App() {
                         }
                     />
                     <Route
-                        path="/finiteDisplay"
+                        path="/twoWayDisplay"
                         element={
-                            <FiniteDisplay/>
-                        }
-                    />
-                    <Route
-                        path="/infiniteDisplay"
-                        element={
-                            <InfiniteDisplay/>
+                            <TwoWayDisplay/>
                         }
                     />
                 </Routes>

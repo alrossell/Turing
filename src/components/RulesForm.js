@@ -91,9 +91,13 @@ function RulesForm(props) {
                         ?
                     </spam>
                     <p id="rules-info-dropdown">
-                        The valid inputs for rules follows the pattern of:
-                        (Initial State), (Initial Sybmol(0/1/#)), (Replacement Sybmol(0/1/#))
-                        (Direction (L/R)), (Next State)
+                        The valid inputs for rules follows the pattern of: <br/>
+                        Initial State, <br/>
+                        Initial Sybmol (0/1/#), <br/>
+                        Replacement Sybmol (0/1/#), <br/>
+                        Direction (L/R), <br/>
+                        Next State <br/>
+                        (Note: they must be seperate with a comma)
                     </p>
                 </div>
                 

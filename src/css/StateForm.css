@@ -31,14 +31,14 @@
     border-radius: 100%;
     border: 3px solid var(--main-black);
     color: var(--main-white);
-    width: 1em;
-    height: 1em;
+    width: 1.5em;
+    height: 1.5em;
     display: flex;
     align-items: center;
     justify-content: center;
     padding: .5em;
     margin: .25em;
-    font-size: .75em;
+    font-size: 1em;
 }
 
 #state-info-dropdown {
@@ -55,24 +55,33 @@
     align-items: center;
 }
 
+#state-form input {
+    font-size: large;
+}
+
+#state-form label input {
+    width: 12em;
+    height: 2em;
+    font-size: large;
+}
+
 #state-info-dropdown {
     position: absolute;
     display: none;
-    left: 105%;
+    top: 105%;
     background-color: var(--main-white);
     border-radius: 4px;
     color: var(--main-black);
-    width: 21vw;
+    width: 22vw;
     padding: 0.25em;
 }
 
 #state-info-dropdown::after {
     content: " ";
     position: absolute;
-    top: 50%;
-    right: 100%; /* To the left of the tooltip */
-    margin-top: -10px;
+    bottom: 100%;
+    right: 45%; 
     border-width: 10px;
     border-style: solid;
-    border-color: transparent var(--main-white) transparent transparent;
+    border-color: transparent transparent var(--main-white) transparent;
   }
