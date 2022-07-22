@@ -87,9 +87,9 @@ function RulesForm(props) {
                     />
                 </label>
                 <div id="rules-info">
-                    <spam>
+                    <span>
                         ?
-                    </spam>
+                    </span>
                     <p id="rules-info-dropdown">
                         The valid inputs for rules follows the pattern of: <br/>
                         Initial State, <br/>

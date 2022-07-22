@@ -14,7 +14,6 @@ function State(props) {
     const navigate = useNavigate();
 
     const allRulesOpt = getData("allRules");
-    console.log(allRulesOpt)
     const [allRules, setAllRules] = useState(
         allRulesOpt === null ? [] : allRulesOpt
     )
@@ -34,18 +33,23 @@ function State(props) {
         }
     }
 
+    function isValid() {
+        return !(allRules.length === 0 || acceptedState === '')
+    }
+    
     function displayIsValid() {
-        if (allRules.length === 0 || acceptedState === '') {
+
+        if (isValid()) {
             return <p 
-                className = "valid-wrapper"
-                id="not-valid-display">
-                    Not a Valid Turing Machine
+                    className="valid-wrapper"
+                    id="is-valid-display">
+                        Is a Valid Turing Machine
                 </p>;
         } else {
             return <p 
-                className="valid-wrapper"
-                id="is-valid-display">
-                    Is a Valid Turing Machine
+                    className = "valid-wrapper"
+                    id="not-valid-display">
+                        Not a Valid Turing Machine
                 </p>;
         }
     }
@@ -74,7 +78,11 @@ function State(props) {
 
             <div className="primer-button-container">
                 
-                <button className="primer-button" onClick={checkIsValid}>
+                <button 
+                    className="primer-button" 
+                    id = {(isValid()) ? "valid-button" : "nonvalid-button"}
+                    onClick={checkIsValid}
+                    >
                     Commence the Turing Machine
                 </button>
                 <button className="primer-button" onClick={setRandomMachine}>

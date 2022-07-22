@@ -76,3 +76,11 @@
     background-color: var(--main-black);
     color: var(--main-white);
 }
+
+#nonvalid-button {
+    border-color: var(--main-red);
+}
+
+#valid-button {
+    border-color: var(--main-green);
+}
